@@ -17,9 +17,18 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
+    %disp('delta: ');
+    delta = sum((X * theta - y) .* X) / m;
+    %disp(delta);
 
+    theta = theta - alpha * delta';
+    %disp('updated theta: ');
+    %disp(theta);
 
-
+    % debug
+    J = computeCost(X, y, theta);
+    %disp("J");
+    %disp(J);
 
 
 

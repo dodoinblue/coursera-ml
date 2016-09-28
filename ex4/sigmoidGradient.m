@@ -13,9 +13,9 @@ g = zeros(size(z));
 %               each value of z (z can be a matrix, vector or scalar).
 
 
+%IMPORTANT: Element-wise multiplication
 
-
-
+g=sigmoid(z).*(1-sigmoid(z));
 
 
 

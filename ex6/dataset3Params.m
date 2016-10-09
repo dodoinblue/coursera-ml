@@ -24,9 +24,24 @@ sigma = 0.3;
 %
 
 
+steps = [0.01; 0.03; 0.1; 0.3; 1; 3; 10; 30]
 
+n = length(steps);
+errors = zeros(n, n);
 
+for i = 1:n
+    for j = 1:n
+        model = svmTrain(X, y, steps(i), @(x1, x2) ...
+                gaussianKernel(x1, x2, steps(j)));
+        pred = svmPredict(model, Xval);
+        errors(i, j) = mean(double(pred ~= yval));
+    end
+end
 
+[ C_index, sigma_index, foo ] = find(errors == min(errors(:)));
+
+C = steps(C_index);
+sigma = steps(sigma_index);
 
 
 % =========================================================================

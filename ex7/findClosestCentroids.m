@@ -15,19 +15,27 @@ idx = zeros(size(X,1), 1);
 % Instructions: Go over every example, find its closest centroid, and store
 %               the index inside idx at the appropriate location.
 %               Concretely, idx(i) should contain the index of the centroid
-%               closest to example i. Hence, it should be a value in the 
+%               closest to example i. Hence, it should be a value in the
 %               range 1..K
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
+for i_example = 1:length(X)
+    % examples loop
+    dist = zeros(K, 1);
+    for j_cent = 1:K
+        % centroids loop
+        % dist(j_cent) = (X(i_example, 1) - centroids(j_cent, 1)) ^ 2 ...
+        %         + (X(i_example, 2) - centroids(j_cent, 2)) ^ 2;
+        v = X(i_example, :) - centroids(j_cent, :);
+        dist(j_cent) = v * v';
+    end
+    % dist = sum((X(i_example) - centroids).^2, 2)
+    [min_dist, idx(i_example)] = min(dist);
+end
 
 
 % =============================================================
 
 end
-
